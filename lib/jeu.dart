@@ -2,11 +2,7 @@ import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class Jeu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,21 +11,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Trash game'),
+      home: MyJeu(title: 'Trash game'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class MyJeu extends StatefulWidget {
+  MyJeu({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyJeu createState() => _MyJeu();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyJeu extends State<MyJeu> {
   int acceptedData = 0;
 
   @override
