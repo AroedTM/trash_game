@@ -2,7 +2,7 @@ import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class Jeu extends StatelessWidget {
+class Hard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,21 +11,21 @@ class Jeu extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyJeu(title: 'Trash game'),
+      home: MyJeuHard(title: 'Trash game'),
     );
   }
 }
 
-class MyJeu extends StatefulWidget {
-  MyJeu({Key? key, required this.title}) : super(key: key);
+class MyJeuHard extends StatefulWidget {
+  MyJeuHard({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyJeu createState() => _MyJeu();
+  _MyJeuHard createState() => _MyJeuHard();
 }
 
-class _MyJeu extends State<MyJeu> {
+class _MyJeuHard extends State<MyJeuHard> {
   int acceptedData = 0;
 
   @override
@@ -66,7 +66,6 @@ class _MyJeu extends State<MyJeu> {
                             itemCount: 50,
                             itemBuilder: (BuildContext context, int index) =>
                                 Draggable<int>(
-                              // Data is the value this Draggable stores.
                               data: 10,
                               child: Container(
                                 margin: const EdgeInsets.only(
@@ -76,7 +75,7 @@ class _MyJeu extends State<MyJeu> {
                                   width: 100.0,
                                   child: const Center(
                                     child: Image(
-                                      image: AssetImage("assets/images/2.png"),
+                                      image: AssetImage("assets/images/3.png"),
                                     ),
                                   ),
                                 ),
@@ -85,7 +84,7 @@ class _MyJeu extends State<MyJeu> {
                                 height: 150,
                                 width: 150,
                                 child: Image(
-                                  image: AssetImage("assets/images/2.png"),
+                                  image: AssetImage("assets/images/3.png"),
                                 ),
                               ),
                               childWhenDragging: Container(),
@@ -114,9 +113,10 @@ class _MyJeu extends State<MyJeu> {
                               alignment: AlignmentDirectional.center,
                               children: <Widget>[
                                 Blob.random(
-                                  size: MediaQuery.of(context).size.width * 0.4,
+                                  size:
+                                      MediaQuery.of(context).size.width * 0.25,
                                 ),
-                                Text('Value is updated to: $acceptedData'),
+                                Text('Score dans la poubelle: $acceptedData'),
                               ],
                             );
                           },
