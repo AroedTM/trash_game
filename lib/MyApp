@@ -1,0 +1,20 @@
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          
+	        style: ElevatedButton.styleFrom(
+            
+            primary: Colors.orange,
+          ),
+        ),
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
