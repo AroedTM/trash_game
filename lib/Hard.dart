@@ -1,6 +1,8 @@
 import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:trashgame/main.dart';
+import 'dechet.dart';
+import 'main.dart';
 
 class Hard extends StatelessWidget {
   @override
@@ -30,8 +32,6 @@ class _MyJeuHard extends State<MyJeuHard> {
 
   @override
   Widget build(BuildContext context) {
-    Random random = new Random();
-    int randomNumber = random.nextInt(3) + 1;
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -63,7 +63,7 @@ class _MyJeuHard extends State<MyJeuHard> {
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: 50,
+                            itemCount: 16,
                             itemBuilder: (BuildContext context, int index) =>
                                 Draggable<int>(
                               data: 10,
@@ -74,18 +74,14 @@ class _MyJeuHard extends State<MyJeuHard> {
                                   height: 100.0,
                                   width: 100.0,
                                   child: const Center(
-                                    child: Image(
-                                      image: AssetImage("assets/images/3.png"),
-                                    ),
+                                    child: Dechet(),
                                   ),
                                 ),
                               ),
                               feedback: Container(
                                 height: 150,
                                 width: 150,
-                                child: Image(
-                                  image: AssetImage("assets/images/3.png"),
-                                ),
+                                child: Dechet(),
                               ),
                               childWhenDragging: Container(),
                             ),
@@ -116,13 +112,48 @@ class _MyJeuHard extends State<MyJeuHard> {
                                   size:
                                       MediaQuery.of(context).size.width * 0.25,
                                 ),
-                                Text('Score dans la poubelle: $acceptedData'),
+                                Text(
+                                  'Score dans la poubelle: $acceptedData',
+                                  style: TextStyle(fontSize: 20),
+                                ),
                               ],
                             );
                           },
                           onAccept: (int data) {
                             setState(() {
                               acceptedData += data;
+                              if (acceptedData >= 90) {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text('Félicitations'),
+                                    content: const Text(
+                                        'Vous avez ramassé assez de déchets'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => MyApp(),
+                                          ),
+                                        ),
+                                        child: const Text('Menu'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyJeuHard(title: 'JeuHard'),
+                                          ),
+                                        ),
+                                        child: const Text('Rejouer'),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
                             });
                           },
                         ),
