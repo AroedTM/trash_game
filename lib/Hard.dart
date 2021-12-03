@@ -113,8 +113,9 @@ class _MyJeuHard extends State<MyJeuHard> {
                                       MediaQuery.of(context).size.width * 0.25,
                                 ),
                                 Text(
-                                  'Score dans la poubelle: $acceptedData',
-                                  style: TextStyle(fontSize: 20),
+                                  'Score dans la poubelle: $acceptedData %',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white),
                                 ),
                               ],
                             );
