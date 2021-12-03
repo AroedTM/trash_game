@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
 import 'dechet.dart';
@@ -72,9 +74,7 @@ class _MyJeuMedium extends State<MyJeuMedium> {
                                 child: Container(
                                   height: 100.0,
                                   width: 100.0,
-                                  child: const Center(
-                                    child: Dechet(),
-                                  ),
+                                  child: const Center(child: Dechet()),
                                 ),
                               ),
                               feedback: Container(
@@ -112,8 +112,9 @@ class _MyJeuMedium extends State<MyJeuMedium> {
                                       MediaQuery.of(context).size.width * 0.35,
                                 ),
                                 Text(
-                                  'Score dans la poubelle: $acceptedData',
-                                  style: TextStyle(fontSize: 30),
+                                  'Score dans la poubelle: $acceptedData %',
+                                  style: TextStyle(
+                                      fontSize: 30, color: Colors.white),
                                 ),
                               ],
                             );
