@@ -1,6 +1,7 @@
 import 'package:blobs/blobs.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'dechet.dart';
+import 'main.dart';
 
 class Easy extends StatelessWidget {
   @override
@@ -27,11 +28,8 @@ class MyJeuEasy extends StatefulWidget {
 
 class _MyJeuEasy extends State<MyJeuEasy> {
   int acceptedData = 0;
-
   @override
   Widget build(BuildContext context) {
-    Random random = new Random();
-    int randomNumber = random.nextInt(3) + 1;
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -63,7 +61,7 @@ class _MyJeuEasy extends State<MyJeuEasy> {
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: 50,
+                            itemCount: 16,
                             itemBuilder: (BuildContext context, int index) =>
                                 Draggable<int>(
                               data: 10,
@@ -74,18 +72,14 @@ class _MyJeuEasy extends State<MyJeuEasy> {
                                   height: 100.0,
                                   width: 100.0,
                                   child: const Center(
-                                    child: Image(
-                                      image: AssetImage("assets/images/1.png"),
-                                    ),
+                                    child: Dechet(),
                                   ),
                                 ),
                               ),
                               feedback: Container(
                                 height: 150,
                                 width: 150,
-                                child: Image(
-                                  image: AssetImage("assets/images/1.png"),
-                                ),
+                                child: Dechet(),
                               ),
                               childWhenDragging: Container(),
                             ),
@@ -116,13 +110,48 @@ class _MyJeuEasy extends State<MyJeuEasy> {
                                   size:
                                       MediaQuery.of(context).size.width * 0.45,
                                 ),
-                                Text('Score dans la poubelle: $acceptedData'),
+                                Text(
+                                  'Score dans la poubelle: $acceptedData',
+                                  style: TextStyle(fontSize: 30),
+                                ),
                               ],
                             );
                           },
                           onAccept: (int data) {
                             setState(() {
                               acceptedData += data;
+                              if (acceptedData >= 70) {
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text('Félicitations'),
+                                    content: const Text(
+                                        'Vous avez ramassé assez de déchets'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) => MyApp(),
+                                          ),
+                                        ),
+                                        child: const Text('Menu'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyJeuEasy(title: 'JeuHard'),
+                                          ),
+                                        ),
+                                        child: const Text('Rejouer'),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
                             });
                           },
                         ),
